@@ -1,0 +1,151 @@
+body {
+  background-color: #09090b;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 0px;
+  outline: 2px dashed #fff;
+  width: 1024px;
+  margin-bottom: 0px;
+}
+
+.title pre {
+  margin-bottom: -16px;
+}
+
+.title p {
+  text-align: right;
+  margin-top: 0px;
+  margin-right: 16px;
+}
+
+.main-screen {
+  display: flex;
+  flex-direction: column;
+  width: 1024px;
+  height: 512px;
+}
+
+.main-screen .game-screen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-screen {
+  display: flex;
+  gap: 64px;
+  flex: 1;
+}
+
+.center-screen {
+  flex: 0;
+}
+
+.left-screen,
+.right-screen {
+  flex: 1;
+  justify-items: center;
+}
+
+.left-screen .user-choice,
+.right-screen .computer-choice {
+  flex: 0;
+}
+
+.hearts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 16px;
+  font-size: 32px;
+  height: 40px;
+}
+
+.roundCounter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.status {
+  display: flex;
+  flex: 0;
+  margin-top: auto;
+  align-items: center;
+  margin-left: 16px;
+  margin-right: 16px;
+  height: 40px;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  outline: 2px dashed #fff;
+  width: 1024px;
+}
+
+.select-move {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: -16px;
+}
+
+.select-move ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0px;
+  gap: 16px;
+}
+
+.select-battle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.battle-btn {
+  width: 276px;
+}
+
+/*font and colors*/
+code,
+p,
+span,
+button,
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+.silkscreen-bold {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.terminal-green {
+  color: #55ff55;
+}
+
+.zelda-red {
+  color: #e4000f;
+}

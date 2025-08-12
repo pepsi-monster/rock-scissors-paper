@@ -3,8 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="script.js"></script>
+    <title>Rock Scissors & Paper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="stylesheet.css" />
+    <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div class="title">
+      <pre>
+    ____             __      _____      _                              ___        ____                       
+   / __ \____  _____/ /__   / ___/_____(_)_____________  __________   ( _ )      / __ \____ _____  ___  _____
+  / /_/ / __ \/ ___/ //_/   \__ \/ ___/ / ___/ ___/ __ \/ ___/ ___/  / __ \/|   / /_/ / __ `/ __ \/ _ \/ ___/
+ / _, _/ /_/ / /__/ ,<     ___/ / /__/ (__  |__  ) /_/ / /  (__  )  / /_/  <   / ____/ /_/ / /_/ /  __/ /    
+/_/ |_|\____/\___/_/|_|   /____/\___/_/____/____/\____/_/  /____/   \____/\/  /_/    \__,_/ .___/\___/_/     
+                                                                                         /_/                 
+      </pre>
+      <p>v.1.0</p>
+    </div>
+    <div class="main-screen">
+      <div class="hearts">
+        <div class="user-hearts zelda-red">
+          <pre></pre>
+        </div>
+        <div class="roundCounter"></div>
+        <div class="computer-hearts zelda-red">
+          <pre></pre>
+        </div>
+      </div>
+      <div class="game-screen">
+        <div class="left-screen">
+          <pre class="user-choice"></pre>
+        </div>
+        <div class="center-screen">
+          <pre>
+ _   _______
+| | / / ___/
+| |/ (__  ) 
+|___/____/  
+</pre
+          >
+        </div>
+        <div class="right-screen"><pre class="computer-choice"></pre></div>
+      </div>
+      <div class="status">
+        <p>
+          <span class="terminal-green">System:</span>
+          <span class="system-out"
+            >Welcome to Rock Scissors & Paper!!! Click buttons to play the
+            game!</span
+          >
+        </p>
+      </div>
+    </div>
+    <div class="select">
+      <div class="select-move">
+        <p>!!! SELECT SELECT SELECT SELECT ▶︎▶▶︎</p>
+        <ul>
+          <li><button class="rsp-btn">Rock</button></li>
+          <li><button class="rsp-btn">Scissors</button></li>
+          <li><button class="rsp-btn">Paper</button></li>
+        </ul>
+        <p>◀︎◀︎◀︎ SELECT SELECT SELECT SELECT !!!</p>
+      </div>
+      <div class="select-battle">
+        <p>!!! SELECT SELECT SELECT SELECT ▶︎▶▶︎</p>
+        <button class="battle-btn">Battle!</button>
+        <p>◀︎◀︎◀︎ SELECT SELECT SELECT SELECT !!!</p>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,3 +1,189 @@
+const userAsciiMoves = {
+  Rock: `    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+`,
+  Paper: `    _______
+---'   ____)____
+          ______)
+         _______)
+        _______)
+---.__________)
+`,
+  Scissors: `    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+`,
+  Unknown: `.-----------.
+|    ???    |
+|   ?? ??   |
+|      ?    |
+|     ?     |
+|     ⁇     |
+'───────────'
+`,
+};
+
+const computerAsciiMoves = {
+  Rock: `  _______    
+ (____   '---
+(_____)      
+(_____)      
+ (____)      
+  (___)__.---
+`,
+  Paper: `      _______    
+ ____(____   '---
+(______          
+(_______         
+ (_______        
+  (__________.---
+`,
+  Scissors: `       _______    
+  ____(____   '---
+ (______          
+(__________       
+      (____)      
+       (___)__.---
+`,
+  Unknown: `.-----------.
+|    ???    |
+|   ?  ??   |
+|      ?    |
+|     ?     |
+|     ⁇     |
+'───────────'
+`,
+};
+
+const userChoiceButtons = document.querySelectorAll(".rsp-btn");
+const statusMessage = document.querySelector(".status .system-out");
+const gameScreen = document.querySelector(".game-screen");
+const userChoiceAscii = document.querySelector(".user-choice");
+const computerChoiceAscii = document.querySelector(".computer-choice");
+const battleButton = document.querySelector(".battle-btn");
+const roundCounter = document.querySelector(".roundCounter");
+const userHealthBar = document.querySelector(".user-hearts pre");
+const computerHealthBar = document.querySelector(".computer-hearts pre");
+const roundCount = document.createElement("p");
+
+let userChoice = "Unknown";
+let computerChoice = "Unknown";
+
+let roundCountNum = 0;
+let roundNotice =
+  roundCountNum < 10 ? `0${roundCountNum}/10` : `${roundCountNum}/10`;
+roundCount.textContent = roundNotice;
+roundCounter.append(roundCount);
+
+let userScore = 10;
+let computerScore = 10;
+
+const drawHealthBar = (n) => {
+  const heart = "❤︎ ";
+  return heart.repeat(n).trimEnd();
+};
+userHealthBar.textContent = drawHealthBar(userScore);
+computerHealthBar.textContent = drawHealthBar(computerScore);
+
+userChoiceAscii.textContent = userAsciiMoves[userChoice];
+computerChoiceAscii.textContent = computerAsciiMoves[computerChoice];
+
+for (const button of userChoiceButtons) {
+  button.addEventListener("click", () => {
+    userChoice = button.innerText;
+    const message = `${userChoice} has been selected. Click the battle button to play!`;
+    userChoiceAscii.textContent = userAsciiMoves[userChoice];
+    statusMessage.textContent = message;
+  });
+}
+
+battleButton.addEventListener("click", () => {
+  if (userChoice === "Unknown") {
+    statusMessage.textContent = "Please select your moves.";
+  } else if (roundCountNum < 8) {
+    computerChoice = getComputerChoice();
+    computerChoiceAscii.textContent = computerAsciiMoves[computerChoice];
+
+    playRound(userChoice, computerChoice);
+
+    userHealthBar.textContent = drawHealthBar(userScore);
+    computerHealthBar.textContent = drawHealthBar(computerScore);
+
+    let roundNotice =
+      roundCountNum < 10 ? `0${roundCountNum}/10` : `${roundCountNum}/10`;
+    roundCount.textContent = roundNotice;
+
+    setTimeout(() => {
+      userChoice = "Unknown";
+      userChoiceAscii.textContent = userAsciiMoves[userChoice];
+      computerChoice = "Unknown";
+      computerChoiceAscii.textContent = computerAsciiMoves[computerChoice];
+      statusMessage.textContent = "Choose your move!";
+    }, 1500);
+  } else if (roundCountNum === 8) {
+    computerChoice = getComputerChoice();
+    computerChoiceAscii.textContent = computerAsciiMoves[computerChoice];
+
+    playRound(userChoice, computerChoice);
+
+    userHealthBar.textContent = drawHealthBar(userScore);
+    computerHealthBar.textContent = drawHealthBar(computerScore);
+
+    let roundNotice =
+      roundCountNum < 10 ? `0${roundCountNum}/10` : `${roundCountNum}/10`;
+    roundCount.textContent = roundNotice;
+
+    setTimeout(() => {
+      userChoice = "Unknown";
+      userChoiceAscii.textContent = userAsciiMoves[userChoice];
+      computerChoice = "Unknown";
+      computerChoiceAscii.textContent = computerAsciiMoves[computerChoice];
+      statusMessage.textContent = "Final round! Choose your move wisely!";
+    }, 1500);
+  } else if (roundCountNum === 9) {
+    computerChoice = getComputerChoice();
+    computerChoiceAscii.textContent = computerAsciiMoves[computerChoice];
+
+    playRound(userChoice, computerChoice);
+
+    userHealthBar.textContent = drawHealthBar(userScore);
+    computerHealthBar.textContent = drawHealthBar(computerScore);
+
+    let roundNotice =
+      roundCountNum < 10 ? `0${roundCountNum}/10` : `${roundCountNum}/10`;
+    roundCount.textContent = roundNotice;
+
+    setTimeout(() => {
+      userChoice = "Unknown";
+      userChoiceAscii.textContent = userAsciiMoves[userChoice];
+      computerChoice = "Unknown";
+      computerChoiceAscii.textContent = computerAsciiMoves[computerChoice];
+
+      const message =
+        userScore > computerScore
+          ? "You have won the match!"
+          : "Computer has won the match!";
+      statusMessage.textContent = `${message} You: ${userScore} Computer: ${computerScore}`;
+      roundCountNum = 0;
+      let roundNotice =
+        roundCountNum < 10 ? `0${roundCountNum}/10` : `${roundCountNum}/10`;
+
+      roundCount.textContent = roundNotice;
+      userScore = 10;
+      computerScore = 10;
+      userHealthBar.textContent = drawHealthBar(userScore);
+      computerHealthBar.textContent = drawHealthBar(computerScore);
+    }, 1500);
+  }
+});
+
 function getComputerChoice() {
   let computerChoice = getRandomInt(3);
   if (computerChoice === 0) {
@@ -14,47 +200,29 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function getHumanChoice() {
-  let humanChoice = prompt("What will you pick — rock, scissors, or paper?");
-  humanChoice =
-    humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
-  return humanChoice;
-}
-
-let computerScore = 0;
-let humanScore = 0;
-
-function playRound(humanChoice, computerChoice) {
-  if (humanChoice === computerChoice) {
-    console.log("Draw!");
+function playRound(userChoice, computerChoice) {
+  if (userChoice === computerChoice) {
+    statusMessage.textContent = "Draw!";
+    computerScore--;
+    userScore--;
+    roundCountNum++;
   } else {
     if (
-      (humanChoice === "Rock" && computerChoice === "Scissors") ||
-      (humanChoice === "Paper" && computerChoice === "Rock") ||
-      (humanChoice === "Scissors" && computerChoice === "Paper")
+      (userChoice === "Rock" && computerChoice === "Scissors") ||
+      (userChoice === "Paper" && computerChoice === "Rock") ||
+      (userChoice === "Scissors" && computerChoice === "Paper")
     ) {
-      console.log(`You win! ${humanChoice} beat(s) ${computerChoice}!`);
-      humanScore++;
+      statusMessage.textContent = `You win! ${userChoice} beat(s) ${computerChoice}!`;
+      computerScore--;
+      roundCountNum++;
     } else if (
-      (humanChoice === "Rock" && computerChoice === "Paper") ||
-      (humanChoice === "Paper" && computerChoice === "Scissors") ||
-      (humanChoice === "Scissors" && computerChoice === "Rock")
+      (userChoice === "Rock" && computerChoice === "Paper") ||
+      (userChoice === "Paper" && computerChoice === "Scissors") ||
+      (userChoice === "Scissors" && computerChoice === "Rock")
     ) {
-      console.log(`You lose! ${computerChoice} beat(s) ${humanChoice}!`);
-      computerScore++;
+      statusMessage.textContent = `You lose! ${computerChoice} beat(s) ${userChoice}!`;
+      userScore--;
+      roundCountNum++;
     }
   }
 }
-
-function playGame() {
-  for (i = 0; i < 5; i++) {
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-  }
-  console.log(`Final score \nHuman: ${humanScore} Computer: ${computerScore}`);
-  humanScore = 0;
-  computerScore = 0;
-}
-
-playGame();
